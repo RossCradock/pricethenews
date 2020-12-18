@@ -1,0 +1,188 @@
+body {
+    /*background-color:aqua; */
+    padding-top: 70px;
+}
+
+#main {
+    padding: 0;
+    height: 90vh;
+}
+
+.form-control {
+    margin-bottom: 1.5em;
+}
+
+.dropdown-menu {
+    height: auto;
+    max-height: 400px;
+    overflow-x: hidden;
+}
+
+#forex-dropdown-menu {
+    max-height: none;
+}
+
+/* time picker */
+#date-picker-row {
+    margin: 1em;
+    margin-top: 0em;
+    margin-bottom: 1.5em;
+}
+#date-picker-icon {
+    background-color: transparent;
+    border: none;
+}
+@media only screen and (min-width: 770px) {
+    #time-picker {
+        height: 90vh;
+    }
+    #time-picker-collapse-button-div {
+        display: none;
+    }
+}
+#time-picker-update {
+    width: 50%;
+    margin-bottom: 2em;
+}
+#search-tags-display {
+    width: 100%;
+}
+#tag-text-input {
+    width: 100%;
+}
+#tag-text-container {
+    padding: 2em 2em 0 2em;
+}
+
+/* graph and interval picker overlay */
+#overlay-container {
+    position: relative;
+    height: 450px;
+    width: 100%;
+}
+.overlay-box {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+}
+#graph {
+    background-color: #0057e3;
+}
+#interval-picker {
+    z-index: 2;
+    height: inherit;
+    width: inherit;
+    padding-left: 52px;
+    padding-right: 3px;
+    padding-top: 29px;
+    padding-bottom: 44px;
+    opacity: 0.3;
+}
+#graph-interval-picker {
+    height: 100%;
+}
+table {
+    height: 100%;
+    width: 100%;
+    background-color: crimson;
+}
+td {
+    position: relative;
+}
+.interval-picker-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border: 1px;
+    padding: 0;
+    background-color: unset;
+}
+
+/* date-display and article button */
+#date-display-containter {
+    padding-bottom: 1%;
+}
+#date-display {
+    margin-left: 2%;
+    padding-top: 2px;
+}
+#find-articles-button {
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-left: 2%;
+    visibility: hidden;
+}
+#articles-display{
+    padding: 2%;
+}
+/* article tabs display */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+.tab button:hover {
+    background-color: #ddd;
+}
+.tab button.active {
+    background-color: #ccc;
+}
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+#ft-img {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+img {
+    height: 30px;
+}
+.article-card {
+    width: 100%;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    color: #555;
+}
+.article-card:hover {
+    background-color: #ddd;
+}
+h4 {
+    float: left;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+h6 {
+    float: left;
+    padding-left: 15px;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+.article-card-date {
+    margin: 0;
+    margin-top: 12px;
+    float: left;
+}
+
+#y-axis-pixels-holder {
+    visibility: hidden;
+}
+.index-symbol-holder {
+    display: none;
+}
+.stocks-url-holder {
+    display: none;
+}
