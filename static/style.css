@@ -11,13 +11,11 @@ body {
 .form-control {
     margin-bottom: 1.5em;
 }
-
 .dropdown-menu {
     height: auto;
     max-height: 400px;
     overflow-x: hidden;
 }
-
 #forex-dropdown-menu {
     max-height: none;
 }
@@ -32,6 +30,7 @@ body {
     background-color: transparent;
     border: none;
 }
+
 @media only screen and (min-width: 770px) {
     #time-picker {
         height: 90vh;
@@ -40,6 +39,16 @@ body {
         display: none;
     }
 }
+
+@media only screen and (max-width: 770px) {
+    #ft_tab_button {
+        width: 100%
+    }
+    #guardian_tab_button{
+        width: 100%
+    }
+}
+
 #time-picker-update {
     width: 50%;
     margin-bottom: 2em;

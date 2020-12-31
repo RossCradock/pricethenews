@@ -50,6 +50,9 @@ def main(instrument, commodity):
     if(instrument == 'i'):
         symbol = commodity
         title = indices.query.filter_by(symbol= commodity).first().name
+    elif(instrument == 'f'):
+        symbol = commodity
+        title = commodity
     else:
         symbol = stocks.query.filter_by(url_name= commodity).first().symbol
         title = commodity

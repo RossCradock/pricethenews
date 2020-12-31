@@ -63,7 +63,7 @@ def requestFromGuardian(start_date, end_date, search):
         + '&order-by=relevance'
         + '&api-key=' + GUARDIAN_API_KEY
     )
-    print(url + query_string)
+    print('Guardian url: ' + url + query_string)
     guardian_request = Request(url + query_string)
     with urlopen(guardian_request) as g:
         guardian_result = g.read()
@@ -100,8 +100,23 @@ def articleRequestWrapper(request):
     elif(instrument == 'i'):
         index = indices.query.filter_by(symbol= commodity_name).first()
         initial_search = index.search_tag
+        specific_search = ''
         broad_search = index.country
-    #elif(instrument == 'f'):
+    elif(instrument == 'f'):
+        # only 1 search for forex
+        if commodity_name[:3] == 'EUR' or commodity_name[4:] == 'EUR':
+            currency_1 = 'Euro'
+        if commodity_name[:3] == 'GBP' or commodity_name[4:] == 'GBP':
+            if currency_1 != None: currency_2 = 'Sterling' 
+            else: currency_1 = 'Sterling'
+        if commodity_name[:3] == 'USD' or commodity_name[4:] == 'USD':
+            if currency_1 != None: currency_2 = 'Dollar' 
+            else: currency_1 = 'Dollar'
+        if commodity_name[:3] == 'JPY' or commodity_name[4:] == 'JPY':
+            currency_2 = 'Yen' 
+        initial_search = currency_1 + ' OR ' + currency_2
+        specific_search = ''
+        broad_search = ''
         
     
     # make sure that most specific search is done
@@ -136,16 +151,20 @@ def articleRequestWrapper(request):
         # Enter into dictionary for response
         if not ft_articles == 'no results':
             for result in ft_result['results'][0]['results']:
-                if(result['aspectSet'] == 'article'):
-                    ft_articles.append({
-                        'title': result['title']['title'],
-                        'subtitle': result['editorial']['subheading'],
-                        'url_id': result['id'],
-                        'publish_date': result['lifecycle']['lastPublishDateTime'] 
-                    })
+                try:
+                    if(result['aspectSet'] == 'article'):
+                        print(str(result))
+                        ft_articles.append({
+                            'title': result['title']['title'],
+                            'subtitle': result['editorial']['subheading'],
+                            'url_id': result['id'],
+                            'publish_date': result['lifecycle']['lastPublishDateTime'] 
+                        })
+                except KeyError as e:
+                    continue
             ft_articles = orderArticles(ft_articles, search_term_queried)
     except Exception as e:
-        print(str(e))
+        print('FT exception: ' + str(e))
         return str(e)
 
 
@@ -154,6 +173,9 @@ def articleRequestWrapper(request):
     initial_search = '"' + initial_search.replace(' ', '%20') + '"'  
     specific_search = '"' + specific_search.replace(' ', '%20') + '"'
     broad_search = '"' + broad_search.replace(' ', '%20') + '"'
+    if instrument == 'f': 
+        initial_search = initial_search.replace('"', '')
+
     try:
         if(search_term != ''):
             # search term enterd by user, only search for this
@@ -185,9 +207,9 @@ def articleRequestWrapper(request):
                 })
             search_term_queried = search_term_queried.replace('%20', ' ').replace('"','')
             guardian_articles = orderArticles(guardian_articles, search_term_queried)
-            print(search_term_queried)
+            print('search term queried: ' + search_term_queried)
     except Exception as e:
-        print(str(e))
+        print('guardian exception: ' + str(e))
         return str(e)
     
 

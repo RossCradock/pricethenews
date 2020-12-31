@@ -18,10 +18,11 @@
 //- set the full time frame on the datedisplay when not yet clicked
 //- find articles needs to open FT tab when articles come back
 //- response is expected to be in json so string responses don't work, need to change one side or the other
-// red set on clicked and return to it upon mouse out
+//- red set on clicked and return to it upon mouse out
+//- img needs to be reset to width: 100% when mobile sized
 // sort out nav bar 
-// img needs to be reset to width: 100% when mobile sized
 // ipad size not right
+// tab to stretch to end of the page
 
 function getE(id){
     return document.getElementById(id);
@@ -40,6 +41,16 @@ function getURLParams(){
 }
 
 // NAV BAR DROPDOWNS \\
+//forex
+let forex_list_items = document.getElementsByClassName('forex-list-items');
+for(let i = 0; i < forex_list_items.length; i++){
+    forex_list_items[i].onclick = function() {
+        location.pathname = 'f/' + forex_list_items[i].innerText.replace(' ⇄ ', '-');
+    };
+}
+
+
+//stocks
 let stocks_list_items = document.getElementsByClassName('stocks-list-items');
 let stocks_url_holder = document.getElementsByClassName('stocks-url-holder');
 for(let i = 0; i < stocks_list_items.length; i++){
@@ -48,6 +59,7 @@ for(let i = 0; i < stocks_list_items.length; i++){
     };
 }
 
+// indices
 var index_list_items = document.getElementsByClassName('index-list-items');
 var index_symbol_items = document.getElementsByClassName('index-symbol-holder');
 for(let i = 0; i < index_list_items.length; i++){
@@ -146,6 +158,8 @@ $(window).resize(function(e) {
     let timePickerDisplay = window.getComputedStyle(getE('time-picker')).display === 'none';
     if(parseInt(window.innerWidth) > 770 && timePickerDisplay){
         getE('time-picker-collapse-button').click();
+        getE('ft_tab_button').style.width = None;
+        getE('guardian_tab_button').style.width = None;
     }
 });
 
