@@ -6,6 +6,8 @@ body {
 #main {
     padding: 0;
     height: 90vh;
+    display: grid;
+    grid-template-rows: 0 .2fr auto;
 }
 
 .form-control {

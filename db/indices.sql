@@ -1,0 +1,38 @@
+CREATE TABLE ptn.indices (
+  `id` integer primary key autoincrement,
+  `name` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `symbol` varchar(255) NOT NULL,
+  `search_tag` varchar(255) DEFAULT NULL
+);
+
+INSERT INTO `indices` (`id`, `name`, `country`, `symbol`, `search_tag`) VALUES
+('1', 'Dow Jones', 'U.S.', '^DJI', 'Dow Jones'),
+('2', 'S&P 500', 'U.S.', '^GSPC', 'S&P'),
+('3', 'Nasdaq', 'U.S.', '^IXIC', 'Nasdaq'),
+('4', 'Nikkei 225', 'Japan', '^N225', 'Nikkei'),
+('5', 'FTSE 100', 'U.K.', '^FTSE', 'FTSE'),
+('6', 'DAX', 'Germany', '^GDAXI', 'DAX'),
+('7', 'CAC 40', 'France', '^FCHI', 'CAC 40'),
+('8', 'Euro Stoxx 50', 'Euro Zone', '^STOXX50E', 'stoxx'),
+('9', 'S&P/TSX', 'Canada', '^GSPTSE', 'TSX'),
+('10', 'ISEQ 20', 'Ireland', '^ISEQ', 'ISEQ'),
+('11', 'AEX', 'Netherlands', '^AEX', 'AEX'),
+('12', 'Nifty 50', 'India', '^NSEI', 'Nifty'),
+('13', 'MOEX', 'Russia', 'IMOEX.ME', 'MOEX'),
+('14', 'Dow Jones Italy', 'Italy', '^ITDOW', ''),
+('15', 'KOSPI', 'South Korea', '^KS11', 'KOSPI'),
+('16', 'S&P/ASX 200', 'Australia', '^AXJO', 'ASX'),
+('17', 'Hang Seng', 'Hong Kong', '^HSCE', 'Hang Seng'),
+('19', 'Shanghai', 'China', '000001.SS', ''),
+('20', 'IBEX 35', 'Spain', '^IBEX', 'IBEX'),
+('23', 'Bovespa', 'Brazil', '^BVSP', ''),
+('25', 'Taiwan Weighted', 'Taiwan', '^TWII', ''),
+('26', 'SMI', 'Switzerland', '^SSMI', 'SMI'),
+('27', 'OMXS30', 'Sweden', '^OMX', ''),
+('28', 'Shenzhen Component', 'China', '399001.SZ', 'SHENZHEN'),
+('30', 'BEL 20', 'Belgium', '^BFX', 'BFX'),
+('31', 'PSI 20', 'Portugal', '^PSI20', ''),
+('33', 'TA 35', 'Israel', 'TA35.TA', 'TA 35'),
+('34', 'BSE Sensex', 'India', '^BSESN', 'Sensex'),
+('35', 'S&P/BMV IPC', 'Mexico', '^MXX', '');

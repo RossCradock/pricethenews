@@ -20,9 +20,10 @@
 //- response is expected to be in json so string responses don't work, need to change one side or the other
 //- red set on clicked and return to it upon mouse out
 //- img needs to be reset to width: 100% when mobile sized
+// update times button is overflowing
 // sort out nav bar 
 // ipad size not right
-// tab to stretch to end of the page
+// artcle tabs to stretch to end of the page
 
 function getE(id){
     return document.getElementById(id);
