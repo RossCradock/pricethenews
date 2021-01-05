@@ -2,7 +2,6 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from datetime import datetime
 import json
-import inspect
 from models import stocks, indices
 
 from config import FT_API_KEY, GUARDIAN_API_KEY
