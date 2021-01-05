@@ -20,10 +20,10 @@
 //- response is expected to be in json so string responses don't work, need to change one side or the other
 //- red set on clicked and return to it upon mouse out
 //- img needs to be reset to width: 100% when mobile sized
-// update times button is overflowing
-// sort out nav bar 
-// ipad size not right
-// artcle tabs to stretch to end of the page
+//- update times button is overflowing
+//- sort out nav bar 
+//- artcle tabs to stretch to end of the page
+//- ipad size not right
 
 function getE(id){
     return document.getElementById(id);
@@ -159,10 +159,14 @@ $(window).resize(function(e) {
     let timePickerDisplay = window.getComputedStyle(getE('time-picker')).display === 'none';
     if(parseInt(window.innerWidth) > 770 && timePickerDisplay){
         getE('time-picker-collapse-button').click();
-        getE('ft_tab_button').style.width = None;
-        getE('guardian_tab_button').style.width = None;
+        getE('ft-tab-button').style.width = None;
+        getE('guardian-tab-button').style.width = None;
     }
 });
+// click on ft tab when display is mobile
+if(parseInt(window.innerWidth) < 770){
+    getE('ft-tab-button').click();
+}
 
 // INTERVAL PICKER \\
 const INTERVAL_HOVER_TIME = 100;
@@ -346,7 +350,7 @@ getE('find-articles-button').onclick = function() {
 
     request_data = JSON.stringify(request_data);
     $.post('/articles/', request_data, function(response_data, status){
-        getE('ft_tab_button').click();
+        getE('ft-tab-button').click();
 
         if(status === 'success'){
             addArticlesResponseToCard(response_data);

@@ -1,13 +1,16 @@
 body {
-    /*background-color:aqua; */
+    background-color: #E0E0E2;
     padding-top: 70px;
+    color: #474747;
 }
 
 #main {
     padding: 0;
     height: 90vh;
-    display: grid;
-    grid-template-rows: 0 .2fr auto;
+}
+#main-table {
+    width: 100%;
+    display: table;
 }
 
 .form-control {
@@ -23,6 +26,9 @@ body {
 }
 
 /* time picker */
+#time-picker {
+    background-color: #E3B5A4;
+}
 #date-picker-row {
     margin: 1em;
     margin-top: 0em;
@@ -32,8 +38,13 @@ body {
     background-color: transparent;
     border: none;
 }
+#time-picker-collapse-button {
+    border-radius: 0;
+    border-width: 1px;
+}
 
-@media only screen and (min-width: 770px) {
+
+@media only screen and (min-width: 768px) {
     #time-picker {
         height: 90vh;
     }
@@ -42,18 +53,20 @@ body {
     }
 }
 
-@media only screen and (max-width: 770px) {
-    #ft_tab_button {
+@media only screen and (max-width: 768px) {
+    #ft-tab-button {
         width: 100%
     }
-    #guardian_tab_button{
+    #guardian-tab-button{
         width: 100%
     }
 }
 
 #time-picker-update {
-    width: 50%;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
     margin-bottom: 2em;
+    white-space: normal;
 }
 #search-tags-display {
     width: 100%;
@@ -75,9 +88,6 @@ body {
     position: absolute;
     height: inherit;
     width: inherit;
-}
-#graph {
-    background-color: #0057e3;
 }
 #interval-picker {
     z-index: 2;
@@ -114,6 +124,7 @@ td {
 /* date-display and article button */
 #date-display-containter {
     padding-bottom: 1%;
+    background-color: #fff;
 }
 #date-display {
     margin-left: 2%;
@@ -127,12 +138,17 @@ td {
 }
 #articles-display{
     padding: 2%;
+    background-color: #fff;
+    display: table-row;
+    height: 100%;
+    overflow: scroll;
 }
 /* article tabs display */
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
+    margin-left: 0.8em;
   }
 .tab button {
     background-color: inherit;
@@ -154,6 +170,10 @@ td {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+    max-height: calc(90vh - 552px);
+    overflow-y: scroll;
+    margin-left: 0.8em;
+
 }
 #ft-img {
     padding-top: 6px;

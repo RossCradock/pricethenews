@@ -1,12 +1,13 @@
 import numpy 
 import pandas as pd
 import yfinance
+from bokeh.plotting import figure, show
+from bokeh.embed import components
+
 import math
 
 from urllib.request import Request, urlopen
 
-from bokeh.plotting import figure, show
-from bokeh.embed import components
 
 def findPaddingLeftPixels(price_close):
     y_axis_pixels = 28
@@ -88,7 +89,7 @@ def getGraphElements(start, end, symbol, title):
     plot.grid.grid_line_alpha = 0.1
     plot.xaxis.axis_label = 'Date'
     plot.yaxis.axis_label = 'Price' if '-' in symbol else 'Price($)'
-    plot.ygrid.band_fill_color = 'lightblue'
+    plot.ygrid.band_fill_color = '#90FCF9'
     plot.ygrid.band_fill_alpha = 0.3
     plot.sizing_mode = 'stretch_width'
 
