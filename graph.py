@@ -75,7 +75,7 @@ def getGraphElements(start, end, symbol, title):
     )
 
     # add renderers
-    plot.line(price_close_dates, price_close, color='navy')
+    plot.line(price_close_dates, price_close, color='#4c637d')
     
     # make sure Nan's show at start - https://stackoverflow.com/questions/65042319/bokeh-graph-starting-or-finishing-with-nan-y-axis-values-is-not-shown/65044129#65044129
     plot.x_range.start = min(price_close_dates) 
@@ -89,7 +89,7 @@ def getGraphElements(start, end, symbol, title):
     plot.grid.grid_line_alpha = 0.1
     plot.xaxis.axis_label = 'Date'
     plot.yaxis.axis_label = 'Price' if '-' in symbol else 'Price($)'
-    plot.ygrid.band_fill_color = '#90FCF9'
+    plot.ygrid.band_fill_color = '#7B9E89'
     plot.ygrid.band_fill_alpha = 0.3
     plot.sizing_mode = 'stretch_width'
 

@@ -1,5 +1,19 @@
+#navbar-fixed-top {
+    background-color: #fff7ef;
+}
+#nav-container {
+    margin-left: 5em;
+}
+#navbar-header {
+    margin-right: 7em;
+}
+#logo {
+    color: #4c637d;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 body {
-    background-color: #E0E0E2;
+    background-color: #fff7ef;
     padding-top: 70px;
     color: #474747;
 }
@@ -27,7 +41,7 @@ body {
 
 /* time picker */
 #time-picker {
-    background-color: #E3B5A4;
+    background-color: #fdcfa5;
 }
 #date-picker-row {
     margin: 1em;

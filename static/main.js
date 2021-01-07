@@ -24,6 +24,19 @@
 //- sort out nav bar 
 //- artcle tabs to stretch to end of the page
 //- ipad size not right
+//- write meta data and change title
+//- need to have default rerouted to non-local website address
+//- navbar title is too right
+// & in the requests screw up guardian api calls
+// add in the github link
+//- the scroll bar shouldn't be there for mobile
+//- the time selector should be closed by default
+// find articles button fit in beside date (change the padding/margins to smaller on mobile)
+// scroll to top of articles when new search complete or maybe highlight the element
+//- favicon logo
+
+// stop sports articles 
+
 
 function getE(id){
     return document.getElementById(id);
@@ -157,16 +170,36 @@ function setDisabledOptions(disableHigherOptions, index){
 // set the collapsed time picker on mobile to open when going from < 768px to > 768px
 $(window).resize(function(e) {
     let timePickerDisplay = window.getComputedStyle(getE('time-picker')).display === 'none';
-    if(parseInt(window.innerWidth) > 770 && timePickerDisplay){
+    if(parseInt(window.innerWidth) > 770){
+        if(timePickerDisplay){
         getE('time-picker-collapse-button').click();
-        getE('ft-tab-button').style.width = None;
-        getE('guardian-tab-button').style.width = None;
+    }
+        getE('ft-tab-button').style.width = 'none';
+        getE('guardian-tab-button').style.width = 'none';
+        getE('navbar-header').style.marginRight = '7em';
+        getE('navbar-header').style.marginLeft = 0;
+        document.getElementsByClassName('tabcontent')[0].style.maxHeight = 'calc(90vh - 552px)';
+        document.getElementsByClassName('tabcontent')[1].style.maxHeight = 'calc(90vh - 552px)';
+    }
+    // mobile screen
+    if(parseInt(window.innerWidth) < 770){
+        getE('navbar-header').style.marginRight = 0;
+        getE('navbar-header').style.marginLeft = 0;
+        getE('articles-display').style.overflow = 'none';
+        document.getElementsByClassName('tabcontent')[0].style.maxHeight = '100%';
+        document.getElementsByClassName('tabcontent')[1].style.maxHeight = '100%';
     }
 });
-// click on ft tab when display is mobile
+// when display is mobile
 if(parseInt(window.innerWidth) < 770){
     getE('ft-tab-button').click();
+    getE('navbar-header').style.marginRight = 0;
+    getE('navbar-header').style.marginLeft = 0;
+    document.getElementsByClassName('tabcontent')[0].style.maxHeight = '100%';
+    document.getElementsByClassName('tabcontent')[1].style.maxHeight = '100%';
+    getE('time-picker').classList.remove('show');
 }
+
 
 // INTERVAL PICKER \\
 const INTERVAL_HOVER_TIME = 100;
