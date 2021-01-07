@@ -27,15 +27,14 @@
 //- write meta data and change title
 //- need to have default rerouted to non-local website address
 //- navbar title is too right
-// & in the requests screw up guardian api calls
-// add in the github link
+//- & in the requests screw up guardian api calls
+//- add in the github link
 //- the scroll bar shouldn't be there for mobile
 //- the time selector should be closed by default
-// find articles button fit in beside date (change the padding/margins to smaller on mobile)
+//- find articles button fit in beside date (change the padding/margins to smaller on mobile)
 // scroll to top of articles when new search complete or maybe highlight the element
 //- favicon logo
-
-// stop sports articles 
+//- stop sports articles 
 
 
 function getE(id){
@@ -178,8 +177,8 @@ $(window).resize(function(e) {
         getE('guardian-tab-button').style.width = 'none';
         getE('navbar-header').style.marginRight = '7em';
         getE('navbar-header').style.marginLeft = 0;
-        document.getElementsByClassName('tabcontent')[0].style.maxHeight = 'calc(90vh - 552px)';
-        document.getElementsByClassName('tabcontent')[1].style.maxHeight = 'calc(90vh - 552px)';
+        document.getElementsByClassName('tabcontent')[0].style.maxHeight = 'calc(90vh - 571px)';
+        document.getElementsByClassName('tabcontent')[1].style.maxHeight = 'calc(90vh - 571px)';
     }
     // mobile screen
     if(parseInt(window.innerWidth) < 770){

@@ -79,7 +79,7 @@ body {
 #time-picker-update {
     padding-left: 1.5em;
     padding-right: 1.5em;
-    margin-bottom: 2em;
+    margin-bottom: 5em;
     white-space: normal;
 }
 #search-tags-display {
@@ -90,6 +90,15 @@ body {
 }
 #tag-text-container {
     padding: 2em 2em 0 2em;
+}
+#github {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 12px;
+    opacity: 0.7;
+}
+#github-text {
+    height: 16px;
 }
 
 /* graph and interval picker overlay */
@@ -148,6 +157,7 @@ td {
     padding-left: 25px;
     padding-right: 25px;
     margin-left: 2%;
+    margin-bottom: 1em;
     visibility: hidden;
 }
 #articles-display{
@@ -184,7 +194,7 @@ td {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
-    max-height: calc(90vh - 552px);
+    max-height: calc(90vh - 571px);
     overflow-y: scroll;
     margin-left: 0.8em;
 

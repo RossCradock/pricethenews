@@ -56,6 +56,7 @@ def requestFromGuardian(start_date, end_date, search):
     query_string = (
         'q=' + search
         + '&format=json'
+        + '&section=politics|business'
         + '&from-date=' + datetime.strftime(start_date, '%Y-%m-%d')
         + '&to-date=' + datetime.strftime(end_date, '%Y-%m-%d')
         + '&show-fields=headline,trailText'
@@ -172,7 +173,7 @@ def articleRequestWrapper(request):
     initial_search = '"' + initial_search.replace(' ', '%20') + '"'  
     specific_search = '"' + specific_search.replace(' ', '%20') + '"'
     broad_search = '"' + broad_search.replace(' ', '%20') + '"'
-    if instrument == 'f': 
+    if instrument == 'f' or '&' in initial_search: 
         initial_search = initial_search.replace('"', '')
 
     try:
