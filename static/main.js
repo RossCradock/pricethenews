@@ -35,6 +35,7 @@
 // scroll to top of articles when new search complete or maybe highlight the element
 //- favicon logo
 //- stop sports articles 
+//- interval picker stays on last touched interval instead of clicked one
 
 
 function getE(id){
@@ -238,10 +239,10 @@ for(let i = 0; i < interval_picker_buttons.length; i++){
         interval_start = moment(calendar_date.utc()).subtract(time_per_interval[0] * (number_of_intervals - i) , time_per_interval[1]);
         interval_end = moment(interval_start.utc()).add(time_per_interval[0], time_per_interval[1]);
 
-        interval_date_string = interval_start.format('DD-MM-YYYY') + ' until ' + 
+        clicked_interval_date_string = interval_start.format('DD-MM-YYYY') + ' until ' + 
             interval_end.format('DD-MM-YYYY')
 
-        getE('date-display').innerHTML = interval_date_string;
+        getE('date-display').innerHTML = clicked_interval_date_string;
 
         // show find articles button
         getE('find-articles-button').style.visibility = 'visible';
@@ -262,7 +263,7 @@ for(let i = 0; i < interval_picker_buttons.length; i++){
     };
     interval_picker_buttons[i].onmouseout = function(e) {
         if(timeout) {
-            getE('date-display').innerHTML = (clicked) ? interval_date_string : 'Click on graph to select a time';
+            getE('date-display').innerHTML = (clicked) ? clicked_interval_date_string : 'Click on graph to select a time';
             interval_picker_buttons[i].style.backgroundColor = (clicked_interval == i) ? 'red' : 'unset';
             clearTimeout(timeout);
         }
