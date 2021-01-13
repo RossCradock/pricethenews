@@ -56,7 +56,7 @@ def requestFromGuardian(start_date, end_date, search):
     query_string = (
         'q=' + search
         + '&format=json'
-        + '&section=politics|business'
+        + '&section=-sports,-football,-travel'
         + '&from-date=' + datetime.strftime(start_date, '%Y-%m-%d')
         + '&to-date=' + datetime.strftime(end_date, '%Y-%m-%d')
         + '&show-fields=headline,trailText'
@@ -215,4 +215,4 @@ def articleRequestWrapper(request):
 
     return json.dumps({'data': [ft_articles, guardian_articles]})
 
-   #https://content.guardianapis.com/search?q=12%20years%20a%20slave&format=json&from-date=2010-01-01&to-date=2010-02-01&show-fields=headline,trailText&order-by=relevance&api-key=25ed0d1e-7578-482c-a15e-4a56a4be88e9 
+# https://content.guardianapis.com/search?q=india&section=-sport,-football,-travel&from-date=2020-05-06&to-date=2020-05-20&show-fields=headline,trailText&order-by=relevance&api-key=25ed0d1e-7578-482c-a15e-4a56a4be88e9
