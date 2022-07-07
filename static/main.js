@@ -178,8 +178,8 @@ $(window).resize(function(e) {
         getE('guardian-tab-button').style.width = 'none';
         getE('navbar-header').style.marginRight = '7em';
         getE('navbar-header').style.marginLeft = 0;
-        document.getElementsByClassName('tabcontent')[0].style.maxHeight = 'calc(90vh - 571px)';
-        document.getElementsByClassName('tabcontent')[1].style.maxHeight = 'calc(90vh - 571px)';
+        document.getElementsByClassName('tabcontent')[0].style.maxHeight = 'calc(90vh - 501px)';
+        document.getElementsByClassName('tabcontent')[1].style.maxHeight = 'calc(90vh - 501px)';
     }
     // mobile screen
     if(parseInt(window.innerWidth) < 770){

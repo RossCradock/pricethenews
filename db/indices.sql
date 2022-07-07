@@ -1,4 +1,4 @@
-CREATE TABLE ptn.indices (
+CREATE TABLE indices (
   `id` integer primary key autoincrement,
   `name` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,

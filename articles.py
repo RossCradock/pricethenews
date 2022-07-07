@@ -128,6 +128,7 @@ def articleRequestWrapper(request):
         specific_search = 'asdfasdfasdf'
 
     ft_articles = []
+    '''
     try:
         if(search_term != ''):
             # search term enterd by user, only search for this
@@ -167,7 +168,7 @@ def articleRequestWrapper(request):
         print('FT exception: ' + str(e))
         return str(e)
 
-
+    '''
     # Guardian
     guardian_articles = []
     initial_search = '"' + initial_search.replace(' ', '%20') + '"'  
@@ -215,4 +216,4 @@ def articleRequestWrapper(request):
 
     return json.dumps({'data': [ft_articles, guardian_articles]})
 
-# https://content.guardianapis.com/search?q=india&section=-sport,-football,-travel&from-date=2020-05-06&to-date=2020-05-20&show-fields=headline,trailText&order-by=relevance&api-key=25ed0d1e-7578-482c-a15e-4a56a4be88e9
+# https://content.guardianapis.com/search?q=india&section=-sport,-football,-travel&from-date=2020-05-06&to-date=2020-05-20&show-fields=headline,trailText&order-by=relevance&api-key=

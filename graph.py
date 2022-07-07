@@ -69,7 +69,7 @@ def getGraphElements(start, end, symbol, title):
     # create a new plot with a datetime axis type
     plot = figure(
         plot_width=800, 
-        plot_height=450, 
+        plot_height=400, 
         x_axis_type="datetime", 
         toolbar_location=None
     )
