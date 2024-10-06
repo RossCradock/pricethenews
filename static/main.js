@@ -174,7 +174,6 @@ $(window).resize(function(e) {
         if(timePickerDisplay){
         getE('time-picker-collapse-button').click();
     }
-        getE('ft-tab-button').style.width = 'none';
         getE('guardian-tab-button').style.width = 'none';
         getE('navbar-header').style.marginRight = '7em';
         getE('navbar-header').style.marginLeft = 0;
@@ -192,7 +191,7 @@ $(window).resize(function(e) {
 });
 // when display is mobile
 if(parseInt(window.innerWidth) < 770){
-    getE('ft-tab-button').click();
+    getE('guardian-tab-button').click();
     getE('navbar-header').style.marginRight = 0;
     getE('navbar-header').style.marginLeft = 0;
     document.getElementsByClassName('tabcontent')[0].style.maxHeight = '100%';
@@ -291,26 +290,6 @@ function openTab(event, news_paper) {
     event.currentTarget.className += " active";
 }
 
-function createHTMLForFTArticleCard(ft_article){
-    return  `                    <a target="_blank" rel="noopener noreferrer" href="https://www.ft.com/content/` + ft_article.url_id + `">
-                        <button class="article-card">
-                            <div class="container-fluid">
-                                <div class="clearfix">
-                                    <div class="col-sm-9">
-                                        <h4>` + ft_article.title + `</h4>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p class="article-card-date">` + ft_article.publish_date + `</p>
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <h6>` + ft_article.subtitle + `</h6>
-                                </div>
-                            </div>
-                        </button>
-                    `;
-}
-
 function createHTMLForGuardianArticleCard(guardian_article){
     return  `                    <a target="_blank" rel="noopener noreferrer" href="https://www.theguardian.com/` + guardian_article.url_id + `">
                         <button class="article-card">
@@ -330,6 +309,7 @@ function createHTMLForGuardianArticleCard(guardian_article){
                         </button>
                     `;
 }
+
 function addArticlesResponseToCard(response_data){
     try {
         response_data = JSON.parse(response_data);
@@ -338,8 +318,7 @@ function addArticlesResponseToCard(response_data){
     }
     if(response_data.toString().includes('Traceback (most recent call last):')) {
         const error_response_text = 'Something went wrong, please wait a moment and try again';
-        getE('ft').innerHTML = error_response_text;
-        getE('guardian').innerHTML = error_response_string;
+        getE('guardian').innerHTML = error_response_text;
         return;
     }
 
@@ -348,24 +327,15 @@ function addArticlesResponseToCard(response_data){
         'No results for that search term' :
         'No results for that time interval';
     if(response_data.data[0] == 'no results'){
-        getE('ft').innerHTML = no_results_text;
-        return;
-    }
-    if(response_data.data[1] == 'no results'){
         getE('guardian').innerHTML = no_results_text;
         return;
     }
 
     // good response
-    let ft_article_cards_html = '';
     let g_article_cards_html = '';
     for(let i = 0; i < response_data.data[0].length; i++){
-        ft_article_cards_html += createHTMLForFTArticleCard(response_data.data[0][i]);
+        g_article_cards_html += createHTMLForGuardianArticleCard(response_data.data[0][i]);
     }
-    for(let i = 0; i < response_data.data[1].length; i++){
-        g_article_cards_html += createHTMLForGuardianArticleCard(response_data.data[1][i]);
-    }
-    getE('ft').innerHTML = ft_article_cards_html;
     getE('guardian').innerHTML = g_article_cards_html;
 }
 
@@ -383,8 +353,8 @@ getE('find-articles-button').onclick = function() {
 
     request_data = JSON.stringify(request_data);
     $.post('/articles/', request_data, function(response_data, status){
-        getE('ft-tab-button').click();
-
+        getE('guardian-tab-button').click();
+        console.log(response_data);
         if(status === 'success'){
             addArticlesResponseToCard(response_data);
         } else{

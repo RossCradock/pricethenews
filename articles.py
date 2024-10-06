@@ -182,23 +182,26 @@ def articleRequestWrapper(request):
             # search term enterd by user, only search for this
             guardian_result = requestFromGuardian(start_date, end_date, search_term)
             search_term_queried = search_term
-            if not ft_result['results'][0]['indexCount'] > 0:
+            if guardian_result is None:
                 guardian_articles = 'no results'
         else:
             # run through the search terms
             guardian_result = requestFromGuardian(start_date, end_date, initial_search)
+            print('specific used')
             search_term_queried = initial_search
             if not guardian_result:
+                print('specific used')
                 search_term_queried = specific_search
                 guardian_result = requestFromGuardian(start_date, end_date, specific_search)
                 if not guardian_result:
+                    print('broad used')
                     search_term_queried = broad_search
                     guardian_result = requestFromGuardian(start_date, end_date, broad_search)
                     if not guardian_result:
                         guardian_articles = 'no results'
                     
         # Enter into dictionary for response
-        if not guardian_articles == 'no results':
+        if guardian_articles != 'no results':
             for g_article in guardian_result['response']['results']:
                 guardian_articles.append({
                     'title': g_article['fields']['headline'],
@@ -211,9 +214,10 @@ def articleRequestWrapper(request):
             print('search term queried: ' + search_term_queried)
     except Exception as e:
         print('guardian exception: ' + str(e))
+        raise e
         return str(e)
     
 
-    return json.dumps({'data': [ft_articles, guardian_articles]})
+    return json.dumps({'data': [guardian_articles]})
 
 # https://content.guardianapis.com/search?q=india&section=-sport,-football,-travel&from-date=2020-05-06&to-date=2020-05-20&show-fields=headline,trailText&order-by=relevance&api-key=

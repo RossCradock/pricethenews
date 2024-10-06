@@ -1,234 +1,253 @@
 <!DOCTYPE html>
 <html id="html" lang="en">
-    <head >
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="View the prices of stocks, indices and currencies with the news articles that made them change.">
-        <meta name="theme-color" content="#ffffff">
-        <meta name=”robots” content="index, nofollow">
-        <meta property="og:image" content="https://pricethenews.com/static/ptn.png">
-        <meta property="og:image:type" content="image/png">
-        <meta property="og:image:width" content="200">
-        <meta property="og:image:height" content="200">
-        <title>PriceTheNews</title>
-        <link rel=icon type="image/jpg" href="/static/ptn.png"/>
 
-        <script src="../static/main.js" defer></script>
-        <link rel="stylesheet" href="../static/style.css">
-        
-        <!-- bootstrap libraries -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="View the prices of stocks, indices and currencies with the news articles that made them change.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name=”robots” content="index, nofollow">
+    <meta property="og:image" content="https://pricethenews.com/static/ptn.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
+    <title>PriceTheNews</title>
+    <link rel=icon type="image/jpg" href="/static/ptn.png" />
 
-        <!-- datetime libraries  https://cdnjs.com/libraries/bootstrap-datepicker -->
-        <script src="https://MomentJS.com/downloads/moment.js"></script> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+    <script src="../static/main.js" defer></script>
+    <link rel="stylesheet" href="../static/style.css">
 
-        <!-- bokeh graph library -->
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.3.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.2.3.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.2.3.min.js" crossorigin="anonymous"></script>
-        {{ graph_script|safe }}
-    </head>
+    <!-- bootstrap libraries -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <body class="container-fluid">
-        <div class="row">    
-            <!-- navbar -->
-            <!-- https://getbootstrap.com/docs/3.3/examples/navbar-fixed-top/ -->
-            <nav style="border-radius:0%" class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top">
-                <div class="container" id="nav-container">
-                    <div class="navbar-header" id="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" id="logo" href="#">PriceTheNews</a>
-                    </div>
+    <!-- datetime libraries  https://cdnjs.com/libraries/bootstrap-datepicker -->
+    <script src="https://MomentJS.com/downloads/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+        crossorigin="anonymous" />
 
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown"><!-- Forex dropdown -->
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forex<span class="caret"></span></a>
-                                <ul id="forex-dropdown" class="dropdown-menu">
-                                    <li class="dropdown-header">€ Euro</li>
-                                    <li><a class="forex-list-items">EUR ⇄ GBP</a></li>
-                                    <li><a class="forex-list-items">EUR ⇄ USD</a></li>
-                                    <li><a class="forex-list-items">EUR ⇄ JPY</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">£ Pound Sterling</li>
-                                    <li><a class="forex-list-items">GBP ⇄ EUR</a></li>
-                                    <li><a class="forex-list-items">GBP ⇄ USD</a></li>
-                                    <li><a class="forex-list-items">GBP ⇄ JPY</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">$ US Dollar</li>
-                                    <li><a class="forex-list-items">USD ⇄ EUR</a></li>
-                                    <li><a class="forex-list-items">USD ⇄ GBP</a></li>
-                                    <li><a class="forex-list-items">USD ⇄ JPY</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">¥ Japanese Yen</li>
-                                    <li><a class="forex-list-items">JPY ⇄ EUR</a></li>
-                                    <li><a class="forex-list-items">JPY ⇄ GBP</a></li>
-                                    <li><a class="forex-list-items">JPY ⇄ USD</a></li>
-                                </ul>
-                            </li>
-                            
-                            <li class="dropdown"> <!-- Stocks -->
-                                <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Stocks<span class="caret"></span></a>
-                                <ul class="dropdown-menu scrollable-menu" role="menu">
-                                    {% for stock in stocks %}
-                                        <li><a class="stocks-list-items">{{ stock.display_name }}</a></li>
-                                        <div class="stocks-url-holder">{{ stock.url_name }}</div>
-                                    {% endfor %}
-                                </ul>
-                            </li>
+    <!-- bokeh graph library -->
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js" crossorigin="anonymous"></script>
+    {{ graph_script|safe }}
+</head>
 
-                            <li class="dropdown"> <!-- Indices -->
-                                <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Indices<span class="caret"></span></a>
-                                <ul class="dropdown-menu scrollable-menu" role="menu">
-                                    {% for index in indices %}
-                                        <li><a class="index-list-items">{{ index.name + ' - ' + index.country }}</a></li>
-                                        <div class="index-symbol-holder">{{ index.symbol }}</div>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+<body class="container-fluid">
+    <div class="row">
+        <!-- navbar -->
+        <!-- https://getbootstrap.com/docs/3.3/examples/navbar-fixed-top/ -->
+        <nav style="border-radius:0%" class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top">
+            <div class="container" id="nav-container">
+                <div class="navbar-header" id="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" id="logo" href="#">PriceTheNews</a>
                 </div>
-            </nav>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"><!-- Forex dropdown -->
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                aria-expanded="false">Forex<span class="caret"></span></a>
+                            <ul id="forex-dropdown" class="dropdown-menu">
+                                <li class="dropdown-header">€ Euro</li>
+                                <li><a class="forex-list-items">EUR ⇄ GBP</a></li>
+                                <li><a class="forex-list-items">EUR ⇄ USD</a></li>
+                                <li><a class="forex-list-items">EUR ⇄ JPY</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">£ Pound Sterling</li>
+                                <li><a class="forex-list-items">GBP ⇄ EUR</a></li>
+                                <li><a class="forex-list-items">GBP ⇄ USD</a></li>
+                                <li><a class="forex-list-items">GBP ⇄ JPY</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">$ US Dollar</li>
+                                <li><a class="forex-list-items">USD ⇄ EUR</a></li>
+                                <li><a class="forex-list-items">USD ⇄ GBP</a></li>
+                                <li><a class="forex-list-items">USD ⇄ JPY</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">¥ Japanese Yen</li>
+                                <li><a class="forex-list-items">JPY ⇄ EUR</a></li>
+                                <li><a class="forex-list-items">JPY ⇄ GBP</a></li>
+                                <li><a class="forex-list-items">JPY ⇄ USD</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown"> <!-- Stocks -->
+                            <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Stocks<span class="caret"></span></a>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                {% for stock in stocks %}
+                                <li><a class="stocks-list-items">{{ stock.display_name }}</a></li>
+                                <div class="stocks-url-holder">{{ stock.url_name }}</div>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        <li class="dropdown"> <!-- Indices -->
+                            <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">Indices<span class="caret"></span></a>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                {% for index in indices %}
+                                <li><a class="index-list-items">{{ index.name + ' - ' + index.country }}</a></li>
+                                <div class="index-symbol-holder">{{ index.symbol }}</div>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="clearfix">
+
+        <div id="time-picker-collapse-button-div">
+            <button id="time-picker-collapse-button" type="button" class="collapsed btn-block btn-sm"
+                data-toggle="collapse" data-target="#time-picker" aria-expanded="true" aria-controls="time-picker">
+                <h6>Time Selector <span class="caret"></span></h6>
+            </button>
         </div>
 
-        <div class="clearfix">
-
-            <div id="time-picker-collapse-button-div">
-                <button id="time-picker-collapse-button" type="button" class="collapsed btn-block btn-sm" data-toggle="collapse" data-target="#time-picker" aria-expanded="true" aria-controls="time-picker">
-                    <h6>Time Selector  <span class="caret"></span></h6>
-                </button>
+        <div id="time-picker" class="col-sm-2 container-fluid collapse show">
+            <div id="tag-text-container" class="row">
+                <div class="col">
+                    <label for="tag-text-input">Search this term instead...</label>
+                    <input id="tag-text-input" class="form-control" type="text" placeholder="Search term"
+                        onkeyup="return tagsTextChange(this.value)">
+                    <p id="search-tags-display"></p>
+                </div>
             </div>
-
-            <div id="time-picker" class="col-sm-2 container-fluid collapse show">
-                <div id="tag-text-container" class="row">
-                    <div class="col">
-                        <label for="tag-text-input">Search this term instead...</label>
-                        <input id="tag-text-input" class="form-control" type="text" placeholder="Search term" onkeyup="return tagsTextChange(this.value)">
-                        <p id="search-tags-display"></p>
-                    </div>
+            <hr>
+            <!-- time picker-->
+            <div class="row">
+                <div class="form-group" style="margin: 2em;">
+                    <label for="time-select-range">Time range of the graph</label>
+                    <select id="time-select-range" class="form-control">
+                        <option>3 months</option>
+                        <option>6 months</option>
+                        <option>1 year</option>
+                        <option>2 years</option>
+                        <option>3 years</option>
+                        <option>5 years</option>
+                    </select>
+                    <label for="time-select-interval">Time intervals of the graph</label>
+                    <select id="time-select-interval" class="form-control">
+                        <option>1 day</option>
+                        <option>2 days</option>
+                        <option>3 days</option>
+                        <option>1 week</option>
+                        <option>2 weeks</option>
+                        <option>4 weeks</option>
+                    </select>
                 </div>
-                <hr>
-                <!-- time picker-->
-                <div class="row">
-                    <div class="form-group" style="margin: 2em;">
-                        <label for="time-select-range">Time range of the graph</label>
-                        <select id="time-select-range" class="form-control">
-                            <option>3 months</option>
-                            <option>6 months</option>
-                            <option>1 year</option>
-                            <option>2 years</option>
-                            <option>3 years</option>
-                            <option>5 years</option>
-                        </select>
-                        <label for="time-select-interval">Time intervals of the graph</label>
-                        <select id="time-select-interval" class="form-control">
-                            <option>1 day</option>
-                            <option>2 days</option>
-                            <option>3 days</option>
-                            <option>1 week</option>
-                            <option>2 weeks</option>
-                            <option>4 weeks</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="date-picker-row" class="row">
-                    <label for="date-picker">Start date of range</label>
-                    <div class="input-group date text-center">
-                        <input id="date-picker" type="text" class="form-control">
-                        <div class="input-group-addon">
-                            <button id="date-picker-icon" type="button" class="glyphicon glyphicon-calendar">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <button id="time-picker-update" class="btn btn-success">
-                            Update Times
+            </div>
+            <div id="date-picker-row" class="row">
+                <label for="date-picker">Start date of range</label>
+                <div class="input-group date text-center">
+                    <input id="date-picker" type="text" class="form-control">
+                    <div class="input-group-addon">
+                        <button id="date-picker-icon" type="button" class="glyphicon glyphicon-calendar">
                         </button>
                     </div>
                 </div>
-                <div id="github">
-                    <a href="https://github.com/RossCradock/pricethenews" target="_blank">
-                        <span>
-                            <img id="github-text" alt="github" src="/static/github_logo.webp">&nbsp;&nbsp;
-                            <img id="github-text" alt="github" src="/static/github_text.png">
-                        </span>
-                    </a>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <button id="time-picker-update" class="btn btn-success">
+                        Update Times
+                    </button>
                 </div>
             </div>
+            <div id="github">
+                <a href="https://github.com/RossCradock/pricethenews" target="_blank" style="text-decoration: none;">
+                    <span>
+                        <img id="github-text" alt="github" src="/static/github_logo.webp">&nbsp;&nbsp;
+                        <img id="github-text" alt="github" src="/static/github_text.png">
+                    </span>
+                </a>
+            </div>
+        </div>
 
-            <div id="main" class="col-sm-10 container-flex float-right">
-                <div id="main-table">
+        <div id="main" class="col-sm-10 container-flex float-right">
+            <div id="main-table">
 
-                    <!-- graph and interval picker -->
-                    <div style="position: static;">
-                        <div id="overlay-container">
-                            <div id="graph" class="overlay-box">
-                                {{ graph_div|safe }}
-                            </div>
-                            <div id="interval-picker" class="overlay-box">
-                                <div id="graph-interval-picker">
-                                    <table>
-                                        <tr>
-                                            {% for i in range(intervals): %}
-                                                <td>
-                                                    <button class="interval-picker-button"></button>
-                                                </td>
-                                            {% endfor %}
-                                        </tr>
-                                    </table>
-                                </div>
+                <!-- graph and interval picker -->
+                <div style="position: static;">
+                    <div id="overlay-container">
+                        <div id="graph" class="overlay-box">
+                            {{ graph_div|safe }}
+                        </div>
+                        <div id="interval-picker" class="overlay-box">
+                            <div id="graph-interval-picker">
+                                <table>
+                                    <tr>
+                                        {% for i in range(intervals): %}
+                                        <td>
+                                            <button class="interval-picker-button"></button>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- time interval display -->
-                    <div id="date-display-containter" class="container-fluid">
-                        <div class="clearfix">
-                            <div class="col-sm-9">
-                                <div id="date-display">Click on graph to select a time</div>
-                            </div>
-                            <div class="col-sm-2">
-                                <button id="find-articles-button" class="btn btn-primary">
-                                    Find Articles <span class="glyphicon glyphicon-file"></span>
+                <!-- time interval display -->
+                <div id="date-display-containter" class="container-fluid">
+                    <div class="clearfix">
+                        <div class="col-sm-9">
+                            <div id="date-display">Click on graph to select a time</div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="find-articles-button" class="btn btn-primary">
+                                Find Articles <span class="glyphicon glyphicon-file"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- articles -->
+                <div id="articles-display">
+                    <div class="tab">
+                        <!--
+                                <button id='ft-tab-button' class="tablinks" onclick="openTab(event, 'ft')">
+                                    <img id="ft-img" alt="Financial Times masthead" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Financial_Times_masthead.svg/512px-Financial_Times_masthead.svg.png">
                                 </button>
-                            </div>
-                        </div>
+                            -->
+                        <button id='guardian-tab-button' class="tablinks" onclick="openTab(event, 'guardian')">
+                            <img alt="The Guardian"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/The_Guardian.svg/512px-The_Guardian.svg.png">
+                        </button>
                     </div>
-
-                    <!-- articles -->
-                    <div id="articles-display">
-                        <div class="tab">
-                            <button id='ft-tab-button' class="tablinks" onclick="openTab(event, 'ft')">
-                                <img id="ft-img" alt="Financial Times masthead" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Financial_Times_masthead.svg/512px-Financial_Times_masthead.svg.png">
-                            </button>
-                            <button id='guardian-tab-button' class="tablinks" onclick="openTab(event, 'guardian')">
-                                <img alt="The Guardian" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/The_Guardian.svg/512px-The_Guardian.svg.png">
-                            </button>
-                        </div>
+                    <!--
                         <div id="ft" class="tabcontent">
                             <br>
                             <p>Click on an interval in the graph, then click on the Find Articles button</p>
                         </div>
-                        <div id="guardian" class="tabcontent">
-                            <br>
-                            <p>Click on an interval in the graph, then click on the Find Articles button</p>
-                        </div>
+                    -->
+                    <div id="guardian" class="tabcontent">
+                        <br>
+                        <p>Click on an interval in the graph, then click on the Find Articles button</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="y-axis-pixels-holder">{{ y_axis_pixels }}</div>
-    </body>
+    </div>
+    <div id="y-axis-pixels-holder">{{ y_axis_pixels }}</div>
+</body>
+
 </html>
